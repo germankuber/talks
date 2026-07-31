@@ -30,72 +30,54 @@ const title = name
   .map((word) => word[0].toUpperCase() + word.slice(1))
   .join(' ');
 
-const template = `---
-marp: true
-theme: kuber
-paginate: true
-size: 16:9
-footer: '${title}'
----
+const template = `<section class="lead">
+  <h1>${title}</h1>
+  <h2>Subtitle</h2>
+  <div class="byline">
+  <p><strong>Germán Küber</strong></p>
+  <p>@germankuber</p>
+  </div>
+</section>
 
-<!-- _class: lead -->
-<!-- _paginate: false -->
-<!-- _footer: '' -->
+<section class="divider">
+  <h2>01</h2>
+  <h1>First Section</h1>
+</section>
 
-# ${title}
+<section>
+  <h1>A regular slide</h1>
+  <ul>
+    <li class="fragment">One idea</li>
+    <li class="fragment">Per bullet</li>
+  </ul>
+</section>
 
-## Subtitle
+<section class="section">
+  <h1>A single beat.</h1>
+</section>
 
-<div class="byline">
+<section>
+  <h1>A pipeline</h1>
+  <div class="flow">
+    <div class="fragment node">First</div>
+    <div class="fragment arrow">&#8595;</div>
+    <div class="fragment node accent">Last</div>
+  </div>
+</section>
 
-**Germán Küber**
-@germankuber
+<section class="impact">
+  <h1>Word</h1>
+</section>
 
-</div>
-
----
-
-<!-- _class: divider -->
-<!-- _paginate: false -->
-
-## 01
-
-# First Section
-
----
-
-# A regular slide
-
-- One idea
-- Per bullet
-
----
-
-<!-- _class: section -->
-
-# A single beat.
-
----
-
-<!-- _class: impact -->
-<!-- _footer: '' -->
-<!-- _paginate: false -->
-
-# Word
-
----
-
-<!-- _class: lead -->
-<!-- _footer: '' -->
-
-# Gracias
-
-## ¿Preguntas?
+<section class="lead">
+  <h1>Gracias</h1>
+  <h2>&#191;Preguntas?</h2>
+</section>
 `;
 
 mkdirSync(join(dir, 'assets'), { recursive: true });
-writeFileSync(join(dir, 'slides.md'), template);
+writeFileSync(join(dir, 'slides.html'), template);
 
-console.log(`Created ${dir}/slides.md`);
-console.log(`\n  pnpm dev              # then open http://localhost:4444/${name}/slides.md`);
+console.log(`Created ${dir}/slides.html`);
+console.log(`\n  pnpm dev              # then open http://localhost:4444/${name}/`);
 console.log(`  pnpm build ${name}`);

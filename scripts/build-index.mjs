@@ -9,17 +9,17 @@ const DECKS_DIR = 'decks';
 
 // Pull the first heading out of a deck so the index shows its real title.
 const readTitle = (deck) => {
-  const source = join(DECKS_DIR, deck, 'slides.md');
+  const source = join(DECKS_DIR, deck, 'slides.html');
   if (!existsSync(source)) return deck;
-  const heading = readFileSync(source, 'utf8').match(/^# (.+)$/m);
-  return heading ? heading[1].trim() : deck;
+  const heading = readFileSync(source, 'utf8').match(/<h1[^>]*>(.*?)<\/h1>/s);
+  return heading ? heading[1].replace(/<[^>]+>/g, '').trim() : deck;
 };
 
 const readSubtitle = (deck) => {
-  const source = join(DECKS_DIR, deck, 'slides.md');
+  const source = join(DECKS_DIR, deck, 'slides.html');
   if (!existsSync(source)) return '';
-  const heading = readFileSync(source, 'utf8').match(/^## (.+)$/m);
-  return heading ? heading[1].trim() : '';
+  const heading = readFileSync(source, 'utf8').match(/<h2[^>]*>(.*?)<\/h2>/s);
+  return heading ? heading[1].replace(/<[^>]+>/g, '').trim() : '';
 };
 
 const escape = (text) =>
@@ -31,7 +31,7 @@ const decks = existsSync(DIST_DIR)
   ? readdirSync(DIST_DIR, { withFileTypes: true })
       .filter((entry) => entry.isDirectory())
       .map((entry) => entry.name)
-      .filter((name) => existsSync(join(DIST_DIR, name, 'slides.html')))
+      .filter((name) => existsSync(join(DIST_DIR, name, 'index.html')))
       .sort()
   : [];
 
@@ -39,11 +39,10 @@ const cards = decks
   .map((deck) => {
     const subtitle = readSubtitle(deck);
     return `      <li class="card">
-        <a href="./${deck}/slides.html">
+        <a href="./${deck}/">
           <h2>${escape(readTitle(deck))}</h2>
           ${subtitle ? `<p>${escape(subtitle)}</p>` : ''}
         </a>
-        <a class="pdf" href="./${deck}/slides.pdf">PDF</a>
       </li>`;
   })
   .join('\n');

@@ -1,0 +1,320 @@
+<section class="lead">
+  <h1>Engineering Cognition</h1>
+  <h2>Diseñando Sistemas Agénticos Confiables</h2>
+  <div class="byline">
+  <p><strong>Germán Küber</strong></p>
+  <p>@germankuber</p>
+  </div>
+</section>
+
+<section class="divider">
+  <h2>01</h2>
+  <h1>El Problema</h1>
+</section>
+
+<section>
+  <h1>Cada semana construimos:</h1>
+  <ul>
+    <li class="fragment">Más agentes</li>
+    <li class="fragment">Más prompts</li>
+    <li class="fragment">Más herramientas</li>
+    <li class="fragment">Más contexto</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h1>Pero de alguna manera...</h1>
+</section>
+
+<section class="section">
+  <h1>El sistema empeora.</h1>
+</section>
+
+<section>
+  <h1>Le echamos la culpa a lo que no es.</h1>
+  <ul>
+    <li class="fragment">"Necesitamos un mejor prompt."</li>
+    <li class="fragment">"Necesitamos GPT-6."</li>
+    <li class="fragment">"Necesitamos Claude."</li>
+    <li class="fragment">"Necesitamos un mejor RAG."</li>
+  </ul>
+</section>
+
+<section class="split">
+  <h1>Dos Mundos</h1>
+  <div class="cols">
+  <div>
+  <h3 class="fragment">Software Tradicional</h3>
+  <div class="flow">
+  <div class="fragment node">Requerimientos</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node">Funciones</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node">Objetos</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node">Tests</div>
+  </div>
+  <p class="fragment"><strong>Esto es ingeniería.</strong></p>
+  </div>
+  <div>
+  <h3 class="fragment">Sistemas Agénticos</h3>
+  <div class="flow">
+  <div class="fragment node">Prompt</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node">LLM</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node">Magia</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node">🤞</div>
+  </div>
+  <p class="fragment"><strong>Esto no es ingeniería.</strong></p>
+  </div>
+  </div>
+</section>
+
+<section>
+  <h1>El Problema Oculto</h1>
+  <ul>
+    <li class="fragment">Todo agente tiene una <strong>carga cognitiva</strong></li>
+    <li class="fragment">Más decisiones que tomar</li>
+    <li class="fragment"><strong>Peor desempeño</strong></li>
+  </ul>
+</section>
+
+<section>
+  <h1>Imaginá un solo ingeniero que:</h1>
+  <ul>
+    <li class="fragment">Diseñe la arquitectura</li>
+    <li class="fragment">Revise la base de datos</li>
+    <li class="fragment">Escriba la API</li>
+    <li class="fragment">Piense en escalabilidad</li>
+    <li class="fragment">Genere la documentación</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h1>Todo al mismo tiempo.</h1>
+</section>
+
+<section class="section">
+  <h1>¿Esperarías buenos resultados?</h1>
+</section>
+
+<section>
+  <h1>Los agentes de IA no son distintos.</h1>
+  <ul>
+    <li class="fragment">El problema <strong>no</strong> es la inteligencia</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h1>Demasiadas decisiones.</h1>
+</section>
+
+<section class="divider">
+  <h2>02</h2>
+  <h1>El Principio</h1>
+</section>
+
+<section class="section">
+  <h1>Nuevo Principio</h1>
+  <blockquote>Reducir la carga cognitiva de cada decisión.</blockquote>
+</section>
+
+<section class="section">
+  <h1>No modeles agentes.</h1>
+  <h2>Modelá decisiones.</h2>
+</section>
+
+<section class="section">
+  <h1>Agente de Datos</h1>
+  <h2>Detectar entidades afectadas</h2>
+</section>
+
+<section class="section">
+  <h1>Agente de Arquitectura</h1>
+  <h2>Identificar servicios impactados</h2>
+</section>
+
+<section class="section">
+  <h1>Agente de Documentación</h1>
+  <h2>Representar decisiones validadas</h2>
+</section>
+
+<section class="section">
+  <h1>Es la decisión.</h1>
+</section>
+
+<section>
+  <h1>Las decisiones producen artefactos</h1>
+  <ul>
+    <li class="fragment"><code>Artefacto != Inteligencia</code></li>
+    <li class="fragment">Son la <strong>evidencia observable</strong> de una decisión</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Lo que significa...</h1>
+  <p class="fragment">No evaluamos artefactos.</p>
+  <p class="fragment"><strong>Evaluamos decisiones.</strong></p>
+</section>
+
+<section class="divider">
+  <h2>03</h2>
+  <h1>TDD para Agentes</h1>
+</section>
+
+<section class="split">
+  <h1>TDD para Sistemas Agénticos</h1>
+  <div class="cols">
+  <div>
+  <h3 class="fragment">Tradicional</h3>
+  <div class="flow">
+  <div class="fragment node">Escribir Test</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node">Escribir Código</div>
+  </div>
+  </div>
+  <div>
+  <h3 class="fragment">Agéntico</h3>
+  <div class="flow">
+  <div class="fragment node">Definir Decisión</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node">Definir Eval</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node accent">Implementar Agente</div>
+  </div>
+  </div>
+  </div>
+</section>
+
+<section>
+  <h1>Los evals pasan a ser...</h1>
+  <p class="fragment"><strong>La especificación.</strong></p>
+  <p class="fragment">No el prompt.</p>
+</section>
+
+<section>
+  <h1>Podés reemplazar:</h1>
+  <ul>
+    <li class="fragment"><code>GPT</code> → <code>Claude</code> → <code>Gemini</code></li>
+    <li class="fragment">→ <strong>Código Determinista</strong></li>
+  </ul>
+</section>
+
+<section class="section">
+  <h1>Sin cambiar tu arquitectura.</h1>
+</section>
+
+<section class="divider">
+  <h2>04</h2>
+  <h1>La Arquitectura</h1>
+</section>
+
+<section>
+  <h1>Knowledge First</h1>
+  <div class="flow">
+  <div class="fragment node">Fuentes</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node">Conocimiento</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node accent">Recuperación</div>
+  </div>
+</section>
+
+<section>
+  <h1>Conocimiento Compartido</h1>
+  <ul>
+    <li class="fragment">Cada especialista lee <strong>el mismo conocimiento</strong></li>
+    <li class="fragment">No el mismo <em>documento</em></li>
+  </ul>
+</section>
+
+<section>
+  <h1>Playbooks de Dominio</h1>
+  <ul>
+    <li class="fragment">Cada dominio sabe cómo investigar</li>
+    <li class="fragment">No inventa preguntas</li>
+    <li class="fragment"><strong>Ejecuta experiencia</strong></li>
+  </ul>
+</section>
+
+<section>
+  <h1>Tres Capas</h1>
+  <div class="flow">
+  <div class="fragment node">Decisiones</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node">Evidencia</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node">Representación</div>
+  </div>
+</section>
+
+<section class="section">
+  <h1>Nunca las mezcles.</h1>
+</section>
+
+<section>
+  <h1>Reconciliación</h1>
+  <ul>
+    <li class="fragment">No muevas evidencia</li>
+    <li class="fragment"><strong>Mové decisiones</strong></li>
+    <li class="fragment">Traé la evidencia sólo cuando haga falta</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Escritura</h1>
+  <ul>
+    <li class="fragment">El escritor <strong>nunca debería volver a pensar</strong></li>
+    <li class="fragment">Sólo representa decisiones ya validadas</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Arquitectura Final</h1>
+  <div class="flow">
+  <div class="fragment node">Conocimiento</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node">Motores de Decisión</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node">Grafo de Decisiones</div>
+  <div class="fragment arrow">↓</div>
+  <div class="fragment node accent">Representación</div>
+  </div>
+</section>
+
+<section class="divider">
+  <h2>05</h2>
+  <h1>Cierre</h1>
+</section>
+
+<section class="section">
+  <h1>Engineering Cognition</h1>
+  <ul>
+    <li class="fragment"><strong>Arquitectura</strong> > Prompt</li>
+    <li class="fragment"><strong>Contexto</strong> > Tokens</li>
+    <li class="fragment"><strong>Decisiones</strong> > Agentes</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h1>Décadas alrededor de funciones y objetos.</h1>
+</section>
+
+<section class="section">
+  <h1>Ahora...</h1>
+</section>
+
+<section class="impact">
+  <h1>Decisiones</h1>
+</section>
+
+<section class="lead">
+  <h1>Gracias</h1>
+  <h2>¿Preguntas?</h2>
+  <div class="byline">
+  <p><strong>Germán Küber</strong></p>
+  <p>@germankuber</p>
+  </div>
+</section>

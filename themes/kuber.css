@@ -1,5 +1,5 @@
 /* Port of themes/kuber.css to reveal.js selectors.
-   Kept beside the Marp theme so the experiment survives a rebuild. */
+   Shared by every deck; layout classes are documented in README.md. */
 
 /* Dark is the default; light is opt-in via [data-theme="light"] on <html>,
    with the OS preference as the fallback when no explicit choice was made. */

@@ -222,6 +222,13 @@
   line-height: 1;
 }
 
+/* A multi-line statement needs to breathe and cannot carry the one-word size. */
+.reveal section.impact h1:has(br) {
+  font-size: 2.6em;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
 /* ---------- divider ---------- */
 
 .reveal section.divider h2 {

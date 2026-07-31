@@ -408,3 +408,10 @@ Representación
 # Gracias
 
 ## ¿Preguntas?
+
+<div class="byline">
+
+**Germán Küber**
+@germankuber
+
+</div>

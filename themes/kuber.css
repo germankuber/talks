@@ -1,0 +1,413 @@
+/* @theme kuber */
+
+@import 'default';
+
+:root {
+  --bg: #0d1117;
+  --bg-alt: #161b22;
+  --fg: #e6edf3;
+  --fg-muted: #8b949e;
+  --accent: #58a6ff;
+  --accent-alt: #7ee787;
+  --border: #30363d;
+  --code-bg: #161b22;
+
+  --font-body: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+}
+
+section {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 26px;
+  line-height: 1.6;
+  padding: 60px 70px;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Headings ---------- */
+
+h1 {
+  font-size: 1.9em;
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.4em;
+}
+
+h2 {
+  font-size: 1.4em;
+  font-weight: 650;
+  color: var(--fg);
+  letter-spacing: -0.02em;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.25em;
+  margin-bottom: 0.6em;
+}
+
+h3 {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Text ---------- */
+
+strong {
+  color: var(--accent);
+  font-weight: 650;
+}
+
+em {
+  color: var(--fg-muted);
+  font-style: italic;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(88, 166, 255, 0.4);
+}
+
+/* ---------- Lists ---------- */
+
+ul,
+ol {
+  margin-left: 0.2em;
+}
+
+li {
+  margin-bottom: 0.45em;
+}
+
+ul > li::marker {
+  color: var(--accent);
+}
+
+ol > li::marker {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---------- Code ---------- */
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--code-bg);
+  color: var(--accent-alt);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1em 1.4em;
+  font-size: 0.8em;
+  line-height: 1.5;
+  /* shrink-wrap the block to its content instead of stretching the full
+     slide width — a centered ASCII diagram in a full-width box reads as
+     lost space */
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--fg);
+}
+
+/* ---------- Tables ---------- */
+
+table {
+  border-collapse: collapse;
+  font-size: 0.95em;
+  width: 100%;
+  background: transparent;
+}
+
+th {
+  background: var(--bg-alt);
+  color: var(--accent);
+  font-weight: 650;
+  text-align: left;
+  padding: 0.7em 1em;
+  border-bottom: 2px solid var(--border);
+}
+
+/* Marpit's default theme paints table rows white with higher specificity,
+   so the dark background has to be set on the row and cell explicitly. */
+section table tr,
+section table tbody tr,
+section table tbody tr:nth-child(even),
+section table tbody tr:nth-child(odd) {
+  background: var(--bg);
+}
+
+section table td {
+  background: var(--bg);
+  color: var(--fg);
+  padding: 0.8em 1em;
+  border-bottom: 1px solid var(--border);
+}
+
+/* contrast tables: the "before" column is muted, the "after" is the point */
+td:first-child {
+  color: var(--fg-muted);
+}
+
+td:last-child strong {
+  color: var(--accent-alt);
+}
+
+/* ---------- Blockquote ---------- */
+
+blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1em;
+  margin-left: 0;
+  color: var(--fg-muted);
+  font-style: italic;
+}
+
+/* ---------- Chrome ---------- */
+
+section::after {
+  color: var(--fg-muted);
+  font-size: 0.55em;
+  font-family: var(--font-mono);
+}
+
+header,
+footer {
+  color: var(--fg-muted);
+  font-size: 0.55em;
+  font-family: var(--font-mono);
+}
+
+/* ---------- Layout classes ---------- */
+
+/* <!-- _class: lead --> full-bleed title slide */
+section.lead {
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(160deg, #0d1117 0%, #161b22 100%);
+}
+
+section.lead h1 {
+  font-size: 2.6em;
+  margin-bottom: 0.2em;
+}
+
+section.lead h2 {
+  border: none;
+  color: var(--fg-muted);
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
+/* speaker byline pinned to the bottom-left of the title slide */
+section.lead .byline {
+  position: absolute;
+  left: 70px;
+  bottom: 55px;
+  text-align: left;
+  line-height: 1.4;
+}
+
+/* handle line: monospaced and accented */
+section.lead .byline p {
+  margin: 0;
+  font-size: 0.7em;
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+/* the name itself stays in the body face, not mono */
+section.lead .byline strong {
+  display: block;
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.15em;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.15em;
+}
+
+/* <!-- _class: section --> conceptual beat: a single idea, full stop */
+section.section {
+  justify-content: center;
+  background: var(--bg-alt);
+}
+
+section.section h1 {
+  font-size: 2.2em;
+  border-left: 6px solid var(--accent);
+  padding-left: 0.4em;
+  margin: 0;
+  line-height: 1.25;
+}
+
+/* Consecutive h1s are ONE sentence wrapped across lines, not separate
+   headings: only the first carries the accent bar, and they share a color. */
+section.section h1 + h1 {
+  border-left-color: transparent;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* On a contrast beat the h1 is the OLD idea and the h2 is the NEW one:
+   mute the first, let the second carry the weight. */
+section.section h2 {
+  border: none;
+  font-size: 2em;
+  font-weight: 700;
+  color: var(--accent-alt);
+  letter-spacing: -0.03em;
+  padding-left: 0.75em;
+  margin: 0.35em 0 0;
+  line-height: 1.25;
+}
+
+/* Contrast beat: when an h2 follows, EVERY h1 above it is the old idea and
+   gets muted together — otherwise a wrapped sentence renders half-lit. */
+section.section:has(h2) h1 {
+  color: var(--fg-muted);
+  font-size: 1.6em;
+  border-left-color: var(--border);
+}
+
+/* <!-- _class: impact --> one word, dead center. The whole slide IS the word. */
+section.impact {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: radial-gradient(ellipse at center, #16202e 0%, #0d1117 70%);
+}
+
+section.impact h1 {
+  font-size: 4.6em;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  color: var(--accent-alt);
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+/* <!-- _class: divider --> chapter divider: tells the audience where
+   they are in the talk. The number is the wayfinding cue. */
+section.divider {
+  justify-content: center;
+  background: linear-gradient(135deg, #0d1117 0%, #1a2333 100%);
+}
+
+section.divider h2 {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  border: none;
+  margin: 0 0 0.5em;
+  padding: 0;
+}
+
+section.divider h1 {
+  font-size: 2.7em;
+  letter-spacing: -0.035em;
+  margin: 0;
+  line-height: 1.1;
+}
+
+section.divider h1::after {
+  content: '';
+  display: block;
+  width: 3.5em;
+  height: 4px;
+  background: var(--accent);
+  margin-top: 0.4em;
+  border-radius: 2px;
+}
+
+/* <!-- _class: invert --> light slide for contrast */
+section.invert {
+  background: #f6f8fa;
+  color: #1f2328;
+}
+
+section.invert h1,
+section.invert h2 {
+  color: #1f2328;
+}
+
+section.invert code {
+  background: #eaeef2;
+  color: #0550ae;
+  border-color: #d0d7de;
+}
+
+/* <!-- _class: split --> two columns */
+/* Two columns driven by explicit <div class="cols"> markup, so authoring
+   order maps to visual order. CSS grid auto-flow interleaved content when
+   the two sides had unequal height. */
+section.split .cols {
+  display: flex;
+  gap: 2.5em;
+  align-items: stretch;
+}
+
+/* each column is its own flex box so the closing line can be pinned to
+   the bottom — otherwise columns with unequal content misalign */
+section.split .cols > * {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+section.split .cols h3 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+/* center the ASCII diagram as a block, keeping its internal alignment */
+section.split .cols pre {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 0.8em;
+}
+
+/* last paragraph of each column sits at the bottom, so both columns
+   close on the same baseline */
+section.split .cols > * > p:last-child {
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+/* split columns are half width — shrink code and tighten spacing so
+   two stacked blocks still fit the 720px slide box */
+section.split pre {
+  font-size: 0.68em;
+  padding: 0.7em 0.9em;
+  margin: 0.4em 0;
+}
+
+section.split h3 {
+  margin: 0.2em 0 0.4em;
+}
+
+section.split p {
+  margin: 0.4em 0;
+}

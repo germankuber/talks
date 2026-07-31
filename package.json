@@ -1,0 +1,15 @@
+{
+  "name": "presentations",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marp slide decks",
+  "scripts": {
+    "dev": "PORT=4444 marp --server ./decks",
+    "build": "node scripts/build.mjs",
+    "build:all": "node scripts/build.mjs --all",
+    "new": "node scripts/new-deck.mjs"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.2.3"
+  }
+}

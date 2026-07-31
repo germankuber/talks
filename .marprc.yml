@@ -1,0 +1,4 @@
+themeSet: ./themes
+html: true
+allowLocalFiles: true
+output: ./dist/

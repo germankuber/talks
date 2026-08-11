@@ -1,0 +1,446 @@
+<section class="lead">
+  <h1>Más allá del prompt</h1>
+  <h2>Contexto, decisiones y arquitectura para sistemas de IA</h2>
+  <div class="byline">
+  <p><strong>Germán Küber</strong></p>
+  <p>@germankuber</p>
+  </div>
+</section>
+
+<section class="divider">
+  <h2>01</h2>
+  <h1>El Prompt</h1>
+</section>
+
+<section class="section">
+  <h1>Nick</h1>
+  <aside class="notes">
+    Primer día en una empresa de IA. Sabe Python, leyó el SDK de OpenAI.
+    Nada más. Y ya tiene un requerimiento sobre la mesa.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>El requerimiento</h1>
+  <blockquote>Dado un ticket de soporte, asignarlo al equipo correcto y determinar su prioridad.</blockquote>
+  <aside class="notes">
+    Leerlo. Dejarlo respirar. Volvemos a esta frase al final.
+  </aside>
+</section>
+
+<section>
+  <h1>Versión 1</h1>
+  <div class="flow">
+    <div class="fragment node">Ticket</div>
+    <div class="fragment arrow">&#8595;</div>
+    <div class="fragment node">Prompt</div>
+    <div class="fragment arrow">&#8595;</div>
+    <div class="fragment node">LLM</div>
+    <div class="fragment arrow">&#8595;</div>
+    <div class="fragment node accent">Resultado</div>
+  </div>
+  <aside class="notes">
+    Un prompt hardcodeado y una llamada. Cero framework. Y anda.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Un ticket ambiguo</h1>
+  <aside class="notes">
+    Llega uno que no encaja. Nick hace lo que haríamos todos: le agrega
+    instrucciones al prompt. Después ejemplos. El prompt empieza a crecer.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>El modelo devuelve texto.</h1>
+  <h2>Nick necesita una estructura.</h2>
+  <aside class="notes">
+    A veces la salida ni siquiera se puede parsear.
+    Structured Outputs, JSON Schema, Pydantic. La salida deja de ser una
+    cadena y pasa a ser un objeto validado.
+  </aside>
+</section>
+
+<section>
+  <h1>Un solo prompt</h1>
+  <ul>
+    <li class="fragment">Clasifica</li>
+    <li class="fragment">Prioriza</li>
+    <li class="fragment">Contempla excepciones</li>
+    <li class="fragment">Aplica reglas de negocio</li>
+  </ul>
+  <aside class="notes">
+    Todo eso en una sola llamada. Y cada cosa nueva que aparece va al mismo
+    lugar.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Arregla la prioridad.</h1>
+  <h2>Rompe la clasificación.</h2>
+  <aside class="notes">
+    Un prompt que hace todo no se puede tocar. Ahí Nick empieza a versionarlos
+    y escribe sus primeros tests.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Un prompt que decide todo.</h1>
+  <h2>Un prompt por decisión.</h2>
+</section>
+
+<section>
+  <h1>Pipeline</h1>
+  <div class="flow">
+    <div class="fragment node">Ticket</div>
+    <div class="fragment arrow">&#8595;</div>
+    <div class="fragment node">classify_team</div>
+    <div class="fragment arrow">&#8595;</div>
+    <div class="fragment node">calculate_priority</div>
+    <div class="fragment arrow">&#8595;</div>
+    <div class="fragment node accent">Resultado</div>
+  </div>
+  <aside class="notes">
+    Cada uno con su prompt y su contrato de salida. Sigue siendo código que
+    Nick escribe y entiende.
+  </aside>
+</section>
+
+<section class="divider">
+  <h2>02</h2>
+  <h1>La Orquestación</h1>
+</section>
+
+<section class="section">
+  <h1>Caminos distintos</h1>
+  <aside class="notes">
+    No todos los tickets recorren el mismo camino. Uno de billing no necesita
+    lo mismo que uno técnico.
+  </aside>
+</section>
+
+<section>
+  <h1>El código se llena de decisiones</h1>
+  <ul>
+    <li class="fragment">Ramas para cada tipo de ticket</li>
+    <li class="fragment">Reintentos cuando el modelo falla</li>
+    <li class="fragment">Casos especiales que no encajan</li>
+  </ul>
+  <aside class="notes">
+    Y llega un punto donde ya nadie sabe por qué camino pasó un ticket.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Deja de ser una función.</h1>
+  <h2>Pasa a ser un grafo.</h2>
+  <aside class="notes">
+    Acá entra LangGraph: StateGraph, nodos, edges condicionales, estado.
+    Está diseñado para workflows stateful con control explícito de la
+    orquestación.
+  </aside>
+</section>
+
+<section>
+  <h1>Router</h1>
+  <div class="flow">
+    <div class="fragment node">Ticket</div>
+    <div class="fragment arrow">&#8595;</div>
+    <div class="fragment node">Router</div>
+    <div class="fragment arrow">&#8595;</div>
+    <div class="fragment node accent">El especialista que corresponda</div>
+  </div>
+  <aside class="notes">
+    Billing, technical, sales, priority. Cada uno es un nodo especializado.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Nick mira lo que armó.</h1>
+  <h2>Cree que construyó un agente.</h2>
+</section>
+
+<section class="divider">
+  <h2>03</h2>
+  <h1>El Contexto</h1>
+</section>
+
+<section class="section">
+  <h1>Un cliente enterprise reporta una caída.</h1>
+  <aside class="notes">
+    Pausa. Dejarlo instalarse antes de pasar.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Prioridad media.</h1>
+</section>
+
+<section>
+  <h1>Nadie se equivocó</h1>
+  <ul>
+    <li class="fragment">El prompt estaba bien escrito</li>
+    <li class="fragment">El grafo ejecutó lo que tenía que ejecutar</li>
+    <li class="fragment">Nadie sabía del <strong>SLA</strong></li>
+  </ul>
+  <aside class="notes">
+    Este es el giro de la charla. El problema no era el modelo.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Lo que el prompt no sabe</h1>
+  <aside class="notes">
+    Un prompt no puede inventar lo que no sabe. No importa cuánto lo mejores.
+  </aside>
+</section>
+
+<section>
+  <h1>Traerle conocimiento</h1>
+  <div class="flow">
+    <div class="fragment node">Ticket</div>
+    <div class="fragment arrow">&#8595;</div>
+    <div class="fragment node">Búsqueda por similitud</div>
+    <div class="fragment arrow">&#8595;</div>
+    <div class="fragment node accent">Al prompt</div>
+  </div>
+  <aside class="notes">
+    Documentación de producto, políticas de soporte, historial de tickets.
+    Acá entra RAG: embeddings y un vector store — pgvector, Pinecone, Qdrant.
+  </aside>
+</section>
+
+<section>
+  <h1>Parecido no es correcto</h1>
+  <ul>
+    <li class="fragment">Documentos que no vienen al caso</li>
+    <li class="fragment">Políticas viejas que ya no aplican</li>
+    <li class="fragment">Y a veces <strong>dos que se contradicen</strong></li>
+  </ul>
+</section>
+
+<section class="section">
+  <h1>Tenía un problema de prompt.</h1>
+  <h2>Ahora tiene uno de recuperación.</h2>
+  <aside class="notes">
+    Filtrado por metadata, búsqueda híbrida, reranking, reescritura de queries.
+    BM25 combinado con vectores. Rerankers de Cohere o Jina.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Lo que no está en ningún documento</h1>
+  <aside class="notes">
+    El SLA vigente de ese cliente. Los incidentes abiertos ahora mismo.
+    Eso está en una base de datos y cambia todos los días.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>El modelo deja de solo leer.</h1>
+  <h2>Ahora también pregunta.</h2>
+  <aside class="notes">
+    Tool calling: get_customer(), get_sla(), get_active_incidents().
+    APIs internas, posiblemente vía MCP. Y todo lo que devuelven hay que
+    recordarlo: state con checkpointing.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Las reglas de negocio</h1>
+  <aside class="notes">
+    Estaban dentro del prompt, mezcladas con las instrucciones. Nick las saca
+    de ahí: config, motor de reglas, o policy-as-code con OPA.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>El contexto</h1>
+  <h2>ya no se concatena. Se arma.</h2>
+  <aside class="notes">
+    Retriever, tools, estado, políticas. Dejó de ser un string y pasó a ser un
+    componente con responsabilidad propia.
+  </aside>
+</section>
+
+<section class="divider">
+  <h2>04</h2>
+  <h1>La Evidencia</h1>
+</section>
+
+<section>
+  <h1>Sale mal y nadie sabe por qué</h1>
+  <ul>
+    <li class="fragment">Qué documentos le llegaron</li>
+    <li class="fragment">Qué devolvieron las tools</li>
+    <li class="fragment">Con qué contexto <strong>terminó decidiendo</strong></li>
+  </ul>
+  <aside class="notes">
+    Acá entra tracing. LangSmith, OpenTelemetry, Phoenix. Un trace por ticket:
+    latencia, tokens, costo, ejecución de cada nodo.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Respondió 200.</h1>
+  <h2>Y asignó mal el ticket.</h2>
+</section>
+
+<section class="section">
+  <h1>Ejecutó bien</h1>
+  <aside class="notes">
+    Que haya ejecutado bien no significa que haya decidido bien. Y eso ningún
+    trace te lo dice.
+  </aside>
+</section>
+
+<section>
+  <h1>Medirlo</h1>
+  <ul>
+    <li class="fragment">Los tickets que ya se resolvieron</li>
+    <li class="fragment">La respuesta correcta ya se conoce</li>
+    <li class="fragment">Correr el sistema y <strong>contar cuántas acierta</strong></li>
+  </ul>
+  <aside class="notes">
+    Evals. Ground truth de equipo y prioridad. pytest más un harness, o
+    LangSmith / OpenAI Evals. Precision, recall, matriz de confusión.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Antes: que el código no se rompa.</h1>
+  <h2>Ahora: que las decisiones no empeoren.</h2>
+  <aside class="notes">
+    Cambia el prompt, cambia el modelo, cambia el retriever: se corre el
+    dataset otra vez y se compara contra el baseline.
+  </aside>
+</section>
+
+<section>
+  <h1>Queda registro</h1>
+  <ul>
+    <li class="fragment">Qué evidencia se usó</li>
+    <li class="fragment">Qué políticas aplicaron</li>
+    <li class="fragment">Qué modelo decidió, y <strong>qué decidió</strong></li>
+  </ul>
+  <aside class="notes">
+    Traza de decisión persistida. Postgres más los traces de OTel o LangSmith.
+  </aside>
+</section>
+
+<section class="divider">
+  <h2>05</h2>
+  <h1>La Vuelta</h1>
+</section>
+
+<section class="split">
+  <h1>Día 1 y día N</h1>
+  <div class="cols">
+  <div>
+  <h3 class="fragment">Al principio</h3>
+  <div class="flow">
+  <div class="fragment node">Prompt</div>
+  <div class="fragment arrow">&#8595;</div>
+  <div class="fragment node">LLM</div>
+  </div>
+  <p class="fragment"><strong>Un archivo.</strong></p>
+  </div>
+  <div>
+  <h3 class="fragment">Ahora</h3>
+  <div class="flow">
+  <div class="fragment node">Router</div>
+  <div class="fragment arrow">&#8595;</div>
+  <div class="fragment node">Contexto</div>
+  <div class="fragment arrow">&#8595;</div>
+  <div class="fragment node">LLM</div>
+  <div class="fragment arrow">&#8595;</div>
+  <div class="fragment node accent">Trazas y evals</div>
+  </div>
+  <p class="fragment"><strong>Un sistema.</strong></p>
+  </div>
+  </div>
+</section>
+
+<section class="section">
+  <h1>El mismo requerimiento</h1>
+  <blockquote>Dado un ticket de soporte, asignarlo al equipo correcto y determinar su prioridad.</blockquote>
+  <aside class="notes">
+    La misma frase del día 1. Nunca cambió.
+  </aside>
+</section>
+
+<section>
+  <h1>Lo que cambió</h1>
+  <ul>
+    <li class="fragment">Los casos reales son ambiguos</li>
+    <li class="fragment">Decidir bien necesita saber cosas</li>
+    <li class="fragment">La evidencia se contradice</li>
+    <li class="fragment">Sin medirlo, <strong>no sabés si funciona</strong></li>
+  </ul>
+  <aside class="notes">
+    No cambió el requerimiento. Cambió lo que Nick entendía del problema.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>La complejidad</h1>
+  <h2>no la trajo Nick. Siempre estuvo ahí.</h2>
+  <aside class="notes">
+    La arquitectura no creció por agregar funcionalidades. Creció porque el
+    problema se fue entendiendo. Estaba escondida detrás de un prompt que
+    parecía funcionar.
+  </aside>
+</section>
+
+<section>
+  <h1>&#191;Qué construyó Nick?</h1>
+  <ul>
+    <li class="fragment">&#191;Un prompt?</li>
+    <li class="fragment">&#191;Un RAG?</li>
+    <li class="fragment">&#191;Un agente?</li>
+    <li class="fragment">&#191;Un grafo?</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h1>Todos esos son mecanismos.</h1>
+  <h2>Lo estable fue la decisión.</h2>
+  <aside class="notes">
+    Los mecanismos van a cambiar. Las dos decisiones del día 1 no cambiaron
+    nunca.
+  </aside>
+</section>
+
+<section>
+  <h1>Una decisión necesita</h1>
+  <ul>
+    <li class="fragment">Contexto para tomarla</li>
+    <li class="fragment">Evidencia que la respalde</li>
+    <li class="fragment">Políticas que la limiten</li>
+    <li class="fragment">Y saber <strong>si estuvo bien</strong></li>
+  </ul>
+</section>
+
+<section class="section">
+  <h1>Nick no construyó un agente.</h1>
+  <h2>Construyó un sistema de decisiones.</h2>
+</section>
+
+<section class="section">
+  <h1>El LLM sigue ahí, igual que el día 1.</h1>
+  <h2>Construimos todo lo que lo rodea.</h2>
+</section>
+
+<section class="impact">
+  <h1>Más allá del prompt</h1>
+</section>
+
+<section class="lead">
+  <h1>Gracias</h1>
+  <h2>&#191;Preguntas?</h2>
+  <div class="byline">
+  <p><strong>Germán Küber</strong></p>
+  <p>@germankuber</p>
+  </div>
+</section>

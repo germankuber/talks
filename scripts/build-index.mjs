@@ -47,12 +47,25 @@ const cards = decks
   })
   .join('\n');
 
+// Same mark the decks carry, kept in sync by hand — it is three lines of SVG.
+const FAVICON =
+  'data:image/svg+xml,' +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">` +
+      `<rect width="64" height="64" rx="12" fill="#0d1117"/>` +
+      `<text x="32" y="44" text-anchor="middle" fill="#58a6ff"` +
+      ` font-family="ui-monospace,Menlo,monospace" font-size="34"` +
+      ` font-weight="700">GK</text>` +
+      `</svg>`,
+  );
+
 const html = `<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Talks — Germán Küber</title>
+<link rel="icon" href="${FAVICON}">
 <style>
   :root {
     --bg: #0d1117;

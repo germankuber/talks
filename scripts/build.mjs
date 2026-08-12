@@ -29,12 +29,26 @@ const listDecks = () =>
     .map((entry) => entry.name)
     .filter((name) => existsSync(join(DECKS_DIR, name, 'slides.html')));
 
+// Inlined as a data URI so a deck stays self-contained: no extra request, and
+// the mark scales to whatever size the browser asks for.
+const FAVICON =
+  'data:image/svg+xml,' +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">` +
+      `<rect width="64" height="64" rx="12" fill="#0d1117"/>` +
+      `<text x="32" y="44" text-anchor="middle" fill="#58a6ff"` +
+      ` font-family="ui-monospace,Menlo,monospace" font-size="34"` +
+      ` font-weight="700">GK</text>` +
+      `</svg>`,
+  );
+
 const page = (deck, slides) => `<!doctype html>
 <html lang="es" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${deck}</title>
+<link rel="icon" href="${FAVICON}">
 <link rel="stylesheet" href="reveal/reveal.css">
 <link rel="stylesheet" href="theme.css">
 </head>

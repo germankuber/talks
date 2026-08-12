@@ -211,7 +211,19 @@
 
 /* ---------- impact ---------- */
 
-.reveal section.impact { text-align: center; }
+/* Centering has to happen across the whole slide, so the statement drops the
+   shared side padding rather than centering inside it. */
+.reveal section.impact {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: 0;
+}
+
+.reveal section.impact h1 { width: 100%; }
 
 .reveal section.impact h1 {
   font-size: 4.6em;
@@ -222,11 +234,15 @@
   line-height: 1;
 }
 
-/* A multi-line statement needs to breathe and cannot carry the one-word size. */
+/* A multi-line statement needs to breathe and cannot carry the one-word size.
+   The width cap keeps a long second line from running past the slide, which
+   would leave the centered block looking shifted. */
 .reveal section.impact h1:has(br) {
-  font-size: 2.6em;
+  font-size: 2.2em;
   line-height: 1.15;
   letter-spacing: -0.03em;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 /* ---------- divider ---------- */

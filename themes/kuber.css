@@ -295,6 +295,159 @@
   line-height: 1;
 }
 
+/* ---------- arch: a horizontal architecture diagram ----------
+   For flows that read left-to-right and come back, which the vertical
+   .flow pipeline cannot show. Colors come from the theme variables, so one
+   drawing works in both themes. */
+
+.reveal .arch {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* A diagram carrying the slide on its own has no heading above it to sit
+   under, so it centers instead of hanging from the top. */
+.reveal section:has(> .arch:first-child) {
+  display: flex;
+  align-items: center;
+  min-height: 100%;
+}
+
+.reveal .arch .node rect {
+  fill: var(--code-bg);
+  stroke: var(--border);
+  stroke-width: 1.5;
+}
+
+.reveal .arch .node text {
+  fill: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 26px;
+  text-anchor: middle;
+}
+
+/* A two-word service name is split across tspans rather than shrunk, so every
+   node keeps the same type size. */
+.reveal .arch .node tspan { font-size: inherit; }
+
+/* The piece the talk is about. */
+.reveal .arch .node.accent rect { stroke: var(--accent-alt); }
+.reveal .arch .node.accent text { fill: var(--accent-alt); font-weight: 600; }
+
+.reveal .arch .link path {
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: none;
+}
+
+.reveal .arch .link text {
+  fill: var(--fg-muted);
+  font-family: var(--font-mono);
+  font-size: 17px;
+  text-anchor: middle;
+}
+
+/* A layered diagram groups nodes into bands; the band names them without
+   competing with the nodes themselves. */
+.reveal .arch .band rect {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1;
+  stroke-dasharray: 5 5;
+}
+
+.reveal .arch .band text {
+  fill: var(--fg-muted);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-anchor: start;
+}
+
+/* Small nodes packed into a layer need a smaller face than a lone node. */
+.reveal .arch .node.sm text { font-size: 18px; }
+
+/* A feedback edge closes the loop rather than carrying the request, so it
+   reads as a different kind of line. */
+.reveal .arch .link.back path {
+  stroke: var(--accent-alt);
+  stroke-dasharray: 7 5;
+}
+
+.reveal .arch .link.back text { fill: var(--accent-alt); }
+
+/* A gate stands beside the flow, not in it. */
+.reveal .arch .node.gate rect {
+  fill: none;
+  stroke-dasharray: 5 4;
+}
+
+/* ---------- stack: a grid of tools behind a chapter ----------
+   Logos are monochrome SVGs inheriting currentColor, so one set of files
+   works in both themes. Anything without a usable mark falls back to its
+   name in the mono face, which sits at the same weight as a logo. */
+
+.reveal .stack {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0.6em;
+  margin-top: 0.5em;
+}
+
+.reveal .stack .tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5em;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.7em 0.9em;
+  min-width: 6.2em;
+  color: var(--fg-muted);
+}
+
+/* The mark carries the tile; the caption only names it. */
+.reveal .stack .tool img {
+  height: 2em;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+
+.reveal .stack .tool span {
+  font-family: var(--font-mono);
+  font-size: 0.6em;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+/* No mark available: the name grows to fill the space a logo would hold,
+   so a mixed row still reads as one rhythm. */
+.reveal .stack .tool.text span {
+  font-size: 0.78em;
+  color: var(--fg);
+}
+
+/* The one Nick actually reached for. */
+.reveal .stack .tool.accent {
+  border-color: var(--accent-alt);
+  color: var(--accent-alt);
+}
+
+.reveal .stack .tool.accent span { color: var(--accent-alt); }
+
 /* ---------- split ---------- */
 
 .reveal .cols { display: flex; gap: 2.5em; align-items: stretch; }

@@ -326,8 +326,10 @@
 .reveal .term {
   display: block;
   box-sizing: border-box;
-  width: auto;
-  margin: 0 70px;
+  width: 1140px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   background: var(--code-bg);
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -337,6 +339,14 @@
   line-height: 1.75;
   text-align: left;
   color: var(--fg);
+}
+
+/* The slide itself must not stretch past the stage, or the box above inherits
+   the overflow and loses its right-hand margin. */
+.reveal section:has(> .term) {
+  box-sizing: border-box;
+  width: 1280px;
+  max-width: 100%;
 }
 
 .reveal .term .prompt { color: var(--accent); }

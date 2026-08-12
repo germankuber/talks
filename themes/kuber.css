@@ -325,10 +325,9 @@
 
 .reveal .term {
   display: block;
-  width: fit-content;
-  min-width: 26em;
-  max-width: 100%;
-  margin: 0 auto;
+  box-sizing: border-box;
+  width: auto;
+  margin: 0 70px;
   background: var(--code-bg);
   border: 1px solid var(--border);
   border-radius: 10px;

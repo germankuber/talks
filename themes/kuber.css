@@ -300,10 +300,13 @@
    .flow pipeline cannot show. Colors come from the theme variables, so one
    drawing works in both themes. */
 
+/* Fit to whichever axis runs out first: a tall diagram scaled to the full
+   width would overflow the slide and get clipped at the bottom. */
 .reveal .arch {
   display: block;
   width: 100%;
   height: auto;
+  max-height: 100%;
   overflow: visible;
 }
 
@@ -312,7 +315,8 @@
 .reveal section:has(> .arch:first-child) {
   display: flex;
   align-items: center;
-  min-height: 100%;
+  justify-content: center;
+  height: 100%;
 }
 
 .reveal .arch .node rect {

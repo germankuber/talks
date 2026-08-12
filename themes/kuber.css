@@ -300,23 +300,25 @@
    .flow pipeline cannot show. Colors come from the theme variables, so one
    drawing works in both themes. */
 
-/* Fit to whichever axis runs out first: a tall diagram scaled to the full
-   width would overflow the slide and get clipped at the bottom. */
+/* The drawing must keep the proportions of its viewBox: height follows from
+   width, and overflow stays clipped so nothing can spill past the slide. */
 .reveal .arch {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 100%;
-  overflow: visible;
+  max-width: 100%;
 }
 
 /* A diagram carrying the slide on its own has no heading above it to sit
-   under, so it centers instead of hanging from the top. */
+   under, so it centers instead of hanging from the top. The side padding is
+   dropped here: the drawing carries its own margin inside the viewBox, and
+   the inherited 70px would push it past the right edge. */
 .reveal section:has(> .arch:first-child) {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  height: 100%;
+  min-height: 100%;
+  padding: 0;
 }
 
 .reveal .arch .node rect {

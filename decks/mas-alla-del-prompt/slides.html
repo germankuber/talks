@@ -57,6 +57,14 @@
   </aside>
 </section>
 
+<section class="section">
+  <h1>El prompt vive dentro del código.</h1>
+  <h2>Cambiar una palabra es un deploy.</h2>
+  <aside class="notes">
+    Nick quiere ajustar una instrucción y tiene que tocar el repositorio, abrir un PR y esperar el pipeline. Para cambiar una palabra.
+  </aside>
+</section>
+
 <section>
   <svg class="arch" viewBox="0 0 900 300" role="img" aria-label="El sistema pide el prompt a un versionador antes de llamar al LLM">
     <defs>
@@ -120,6 +128,14 @@
     El prompt deja de estar hardcodeado. Ahora vive afuera, versionado, y el
     sistema lo pide antes de cada llamada. Una pieza más. Y todavía no hicimos
     nada interesante.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>El modelo devuelve texto libre.</h1>
+  <h2>Alguien tiene que interpretarlo.</h2>
+  <aside class="notes">
+    A veces viene envuelto en markdown, a veces con una explicación adelante. El parseo se llena de casos especiales.
   </aside>
 </section>
 
@@ -202,6 +218,14 @@
     que arma la consulta, pide el prompt versionado, llama al LLM y procesa lo
     que vuelve. El LLM devuelve JSON — el servicio lo convierte en una
     respuesta rica.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Cada llamada elige su propia versión.</h1>
+  <h2>Nadie sabe cuál está corriendo.</h2>
+  <aside class="notes">
+    Un prompt para producción, otro para pruebas, uno viejo que quedó. Hace falta alguien que decida cuál corresponde.
   </aside>
 </section>
 
@@ -298,6 +322,14 @@
     Otra capa. El servicio de consulta ya no habla con el versionador: le pide
     a un Prompt Service, y ese decide qué versión corresponde.
     Cada pieza resuelve algo real. Y ninguna hace que el sistema decida mejor.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>El cliente era enterprise.</h1>
+  <h2>El sistema no tenía cómo saberlo.</h2>
+  <aside class="notes">
+    Este es el giro. El prompt estaba bien escrito y el sistema ejecutó bien. Pero nadie sabía del SLA. Un prompt no puede inventar lo que no sabe.
   </aside>
 </section>
 
@@ -399,6 +431,14 @@
   </aside>
 </section>
 
+<section class="section">
+  <h1>Trae documentos parecidos.</h1>
+  <h2>No los correctos.</h2>
+  <aside class="notes">
+    Y encima el SLA de hoy no está en ningún documento: está en una base de datos y cambia todos los días. Nada de eso lo resuelve el retrieval.
+  </aside>
+</section>
+
 <section>
   <svg class="arch" viewBox="0 0 1120 570" role="img" aria-label="El servicio suma reranking, tools y estado a lo que ya traía del RAG">
     <defs>
@@ -491,6 +531,14 @@
     El RAG traía documentos parecidos pero no los correctos: aparece el
     reranking. El SLA de hoy no está en ningún documento: aparecen las tools.
     Y todo lo que se junta hay que recordarlo: aparece el estado.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Todos los tickets siguen el mismo camino.</h1>
+  <h2>No todos lo necesitan.</h2>
+  <aside class="notes">
+    Uno de facturación no precisa lo mismo que uno técnico. Y las reglas de SLA siguen escondidas adentro del prompt.
   </aside>
 </section>
 
@@ -594,6 +642,14 @@
     router, que decide antes de que empiece el trabajo.
     Y las reglas de SLA, los escalamientos, las restricciones del negocio
     dejan de vivir dentro del prompt: se vuelven una capa aparte.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Un ticket sale mal.</h1>
+  <h2>Nadie puede explicar por qué.</h2>
+  <aside class="notes">
+    No sabemos qué documentos le llegaron, ni qué devolvieron las tools, ni con qué contexto terminó decidiendo.
   </aside>
 </section>
 
@@ -719,6 +775,14 @@
   </aside>
 </section>
 
+<section class="section">
+  <h1>Ya son doce piezas.</h1>
+  <h2>Y el dibujo dejó de entrar en una línea.</h2>
+  <aside class="notes">
+    Momento de parar y reordenar. No agregamos nada nuevo acá: es lo mismo, puesto en capas.
+  </aside>
+</section>
+
 <section>
   <svg class="arch" viewBox="0 0 1120 690" role="img" aria-label="Arquitectura final en capas: entrada, decisión, contexto, modelo y evidencia">
     <defs>
@@ -841,6 +905,14 @@
     derecha queda la evidencia de que estuvo bien.
     Miren dónde quedó el LLM: una caja más, abajo a la izquierda. Todo lo
     demás lo construimos nosotros.
+  </aside>
+</section>
+
+<section class="section">
+  <h1>Medimos al final.</h1>
+  <h2>Y ahí se queda.</h2>
+  <aside class="notes">
+    Los evals dicen que algo empeoró, y esa información no vuelve a ningún lado.
   </aside>
 </section>
 

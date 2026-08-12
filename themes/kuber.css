@@ -225,6 +225,14 @@
 
 .reveal section.impact h1 { width: 100%; }
 
+/* A statement that carries its accent on one word rather than the whole line. */
+.reveal section.impact h1.plain { color: var(--fg); }
+
+.reveal section.impact h1.plain em {
+  color: var(--accent-alt);
+  font-style: normal;
+}
+
 .reveal section.impact h1 {
   font-size: 4.6em;
   color: var(--accent-alt);
